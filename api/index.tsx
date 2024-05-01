@@ -18,7 +18,7 @@ export const app = new Frog({
 
 app.frame('/', (c) => {
   const { buttonValue, inputText, status } = c
-  const fruit = inputText || buttonValue
+  const input = inputText || buttonValue
   return c.res({
     image: (
       <div
@@ -27,7 +27,7 @@ app.frame('/', (c) => {
           background:
             status === 'response'
               ? 'linear-gradient(to right, #432889, #17101F)'
-              : 'black',
+              : 'white',
           backgroundSize: '100% 100%',
           display: 'flex',
           flexDirection: 'column',
@@ -40,7 +40,7 @@ app.frame('/', (c) => {
       >
         <div
           style={{
-            color: 'white',
+            color: 'black',
             fontSize: 60,
             fontStyle: 'normal',
             letterSpacing: '-0.025em',
@@ -51,16 +51,16 @@ app.frame('/', (c) => {
           }}
         >
           {status === 'response'
-            ? `Nice choice.${fruit ? ` ${fruit.toUpperCase()}!!` : ''}`
-            : 'Welcome!'}
+            ? `Nice choice.${input ? ` ${input.toUpperCase()}!!` : ''}`
+            : 'Welcome to Atlas'}
         </div>
       </div>
     ),
     intents: [
-      <TextInput placeholder="Enter custom fruit..." />,
-      <Button value="apples">Apples</Button>,
-      <Button value="oranges">Oranges</Button>,
-      <Button value="bananas">Bananas</Button>,
+      <TextInput placeholder="Ask Atlas..." />,
+      <Button value="ideas">Ideas</Button>,
+      <Button value="conversation">Conversations</Button>,
+      <Button value="questions">Questions</Button>,
       status === 'response' && <Button.Reset>Reset</Button.Reset>,
     ],
   })
