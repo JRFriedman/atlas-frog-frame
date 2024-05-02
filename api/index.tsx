@@ -20,7 +20,7 @@ app.frame('/', (c) => {
   const { buttonValue, inputText, status } = c
   const input = inputText || buttonValue
   return c.res({
-    image: 'https://i.ibb.co/b18qNy5/atlas-frames.gif',
+    image: 'https://i.ibb.co/hC5Gkjk/atlas-frame-cover.png',
     
     // (
     //   <div
