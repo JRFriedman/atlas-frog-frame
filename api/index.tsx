@@ -19,7 +19,7 @@ export const app = new Frog({
 app.frame('/', (c) => {
   const { buttonValue, status } = c
   return c.res({
-    image: 'https://i.ytimg.com/vi/R3UACX5eULI/maxresdefault.jpg',
+    image: 'https://i.ibb.co/QMzz1Bw/word-salad-background.png',
 
 // app.frame('/', (c) => {
 //   const { buttonValue, inputText, status } = c
