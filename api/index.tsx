@@ -17,50 +17,45 @@ export const app = new Frog({
 })
 
 app.frame('/', (c) => {
-  const { buttonValue, status } = c
+  const { buttonValue, inputText, status } = c
+  const input = inputText || buttonValue
   return c.res({
-    image: 'https://i.ibb.co/QMzz1Bw/word-salad-background.png',
-
-// app.frame('/', (c) => {
-//   const { buttonValue, inputText, status } = c
-//   const input = inputText || buttonValue
-//   return c.res({
-//     image: (
-//       <div
-//         style={{
-//           alignItems: 'center',
-//           background:
-//             status === 'response'
-//               ? 'linear-gradient(to right, white, #DDDDDD)'
-//               : 'white',
-//           backgroundSize: '100% 100%',
-//           display: 'flex',
-//           flexDirection: 'column',
-//           flexWrap: 'nowrap',
-//           height: '100%',
-//           justifyContent: 'center',
-//           textAlign: 'center',
-//           width: '100%',
-//         }}
-//       >
-//         <div
-//           style={{
-//             color: 'black',
-//             fontSize: 60,
-//             fontStyle: 'normal',
-//             letterSpacing: '-0.025em',
-//             lineHeight: 1.4,
-//             marginTop: 30,
-//             padding: '0 120px',
-//             whiteSpace: 'pre-wrap',
-//           }}
-//         >
-//           {status === 'response'
-//             ? `Nice choice.${input ? ` ${input.toUpperCase()}!!` : ''}`
-//             : 'Welcome to Atlas'}
-//         </div>
-//       </div>
-//     ),
+    image: (
+      <div
+        style={{
+          alignItems: 'center',
+          background:
+            status === 'response'
+              ? 'linear-gradient(to right, white, #DDDDDD)'
+              : 'white',
+          backgroundSize: '100% 100%',
+          display: 'flex',
+          flexDirection: 'column',
+          flexWrap: 'nowrap',
+          height: '100%',
+          justifyContent: 'center',
+          textAlign: 'center',
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            color: 'black',
+            fontSize: 60,
+            fontStyle: 'normal',
+            letterSpacing: '-0.025em',
+            lineHeight: 1.4,
+            marginTop: 30,
+            padding: '0 120px',
+            whiteSpace: 'pre-wrap',
+          }}
+        >
+          {status === 'response'
+            ? `Nice choice.${input ? ` ${input.toUpperCase()}!!` : ''}`
+            : 'Welcome to Atlas'}
+        </div>
+      </div>
+    ),
     intents: [
       <TextInput placeholder="Ask Atlas..." />,
       <Button value="ideas">Ideas</Button>,
