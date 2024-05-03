@@ -1,12 +1,19 @@
 import { Button, Frog, TextInput } from 'frog'
 import { devtools } from 'frog/dev'
 import { serveStatic } from 'frog/serve-static'
+// import { neynar } from 'frog/hubs'
 import { handle } from 'frog/vercel'
 
+// Uncomment to use Edge Runtime.
+// export const config = {
+//   runtime: 'edge',
+// }
 
 export const app = new Frog({
   assetsPath: '/',
   basePath: '/api',
+  // Supply a Hub to enable frame verification.
+  // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 })
 
 app.frame('/', (c) => {
@@ -14,22 +21,52 @@ app.frame('/', (c) => {
   const input = inputText || buttonValue
   return c.res({
     image: (
-      <img
-        src="https://i.ibb.co/T88t6kW/Screen-Recording-2024-05-02-at-8-08-01-PM.gif" // Replace with your image URL
-        alt="Image" 
-        style={{ width: '100%', height: 'auto' }} // Adjust image size as needed
-      />
+      <div
+        style={{
+          alignItems: 'center',
+          background:
+            status === 'response'
+              ? 'linear-gradient(to right, white, #DDDDDD)'
+              : 'white',
+          backgroundSize: '100% 100%',
+          display: 'flex',
+          flexDirection: 'column',
+          flexWrap: 'nowrap',
+          height: '100%',
+          justifyContent: 'center',
+          textAlign: 'center',
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            color: 'black',
+            fontSize: 60,
+            fontStyle: 'normal',
+            letterSpacing: '-0.025em',
+            lineHeight: 1.4,
+            marginTop: 30,
+            padding: '0 120px',
+            whiteSpace: 'pre-wrap',
+          }}
+        >
+          {status === 'response'
+            ? `Nice choice.${input ? ` ${input.toUpperCase()}!!` : ''}`
+            : 'Welcome to Atlas'}
+        </div>
+      </div>
     ),
     intents: [
       <TextInput placeholder="Ask Atlas..." />,
-      <Button.Link href="https://i.ibb.co/T88t6kW/Screen-Recording-2024-05-02-at-8-08-01-PM.gif">Ideas</Button.Link>, // Replace URL with desired external link
-      <Button.Link href="https://i.ibb.co/T88t6kW/Screen-Recording-2024-05-02-at-8-08-01-PM.gif">Conversations</Button.Link>, // Replace URL with desired external link
-      <Button.Link href="https://i.ibb.co/T88t6kW/Screen-Recording-2024-05-02-at-8-08-01-PM.gif">Questions</Button.Link>, // Replace URL with desired external link
+      <Button value="ideas">Ideas</Button>,
+      <Button value="conversation">Conversations</Button>,
+      <Button value="questions">Questions</Button>,
       status === 'response' && <Button.Reset>Reset</Button.Reset>,
     ],
   })
 })
 
+// @ts-ignore
 const isEdgeFunction = typeof EdgeFunction !== 'undefined'
 const isProduction = isEdgeFunction || import.meta.env?.MODE !== 'development'
 devtools(app, isProduction ? { assetsPath: '/.frog' } : { serveStatic })
