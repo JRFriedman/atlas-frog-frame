@@ -3,6 +3,7 @@ import { devtools } from 'frog/dev'
 import { serveStatic } from 'frog/serve-static'
 import { handle } from 'frog/vercel'
 
+
 export const app = new Frog({
   assetsPath: '/',
   basePath: '/api',
